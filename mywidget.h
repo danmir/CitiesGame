@@ -1,16 +1,15 @@
 #ifndef MYWIDGET_H
 #define MYWIDGET_H
 
-#include <QWidget>
-#include <QApplication>
 #include <QApplication>
 #include <QFont>
+#include <QGridLayout>
 #include <QLCDNumber>
 #include <QPushButton>
 #include <QSlider>
 #include <QVBoxLayout>
 #include <QWidget>
-#include <iostream>
+#include "lcdrange.h"
 
 class MyWidget : public QWidget
  {

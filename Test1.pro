@@ -14,7 +14,9 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    mywidget.cpp
+    mywidget.cpp \
+    lcdrange.cpp
 
 HEADERS  += mainwindow.h \
-    mywidget.h
+    mywidget.h \
+    lcdrange.h

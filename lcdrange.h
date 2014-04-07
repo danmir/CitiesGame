@@ -1,18 +1,19 @@
 #ifndef LCDRANGE_H
 #define LCDRANGE_H
 
+#include <QApplication>
+#include <QFont>
+#include <QGridLayout>
+#include <QLCDNumber>
+#include <QPushButton>
+#include <QSlider>
+#include <QVBoxLayout>
 #include <QWidget>
 
 class LCDRange : public QWidget
-{
-    Q_OBJECT
-public:
-    explicit LCDRange(QWidget *parent = 0);
-
-signals:
-
-public slots:
-
-};
+ {
+ public:
+     LCDRange(QWidget *parent = 0);
+ };
 
 #endif // LCDRANGE_H
