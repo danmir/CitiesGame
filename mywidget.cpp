@@ -15,10 +15,16 @@ MyWidget::MyWidget(QWidget *parent)
     // Qt заботится о ней и удалит её автоматически, когда придёт время уничтожать MyWidget. Поэтому MyWidget не нуждается в деструкторе.
 
     QGridLayout *grid = new QGridLayout;
+    LCDRange *previousRange = 0;
+
     for (int row = 0; row < 3; ++row) {
         for (int column = 0; column < 3; ++column) {
             LCDRange *lcdRange = new LCDRange;
             grid->addWidget(lcdRange, row, column);
+            if (previousRange)
+                connect(lcdRange, SIGNAL(valueChanged(int)),
+                        previousRange, SLOT(setValue(int)));
+            previousRange = lcdRange;
         }
     }
 

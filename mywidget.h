@@ -9,6 +9,7 @@
 #include <QSlider>
 #include <QVBoxLayout>
 #include <QWidget>
+#include <QGridLayout>
 #include "lcdrange.h"
 
 class MyWidget : public QWidget
