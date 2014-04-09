@@ -4,32 +4,24 @@ MyWidget::MyWidget(QWidget *parent)
 // Как и большинство виджетов, он всего лишь вызывает конструктор родительского класса - QWidget'а.
     : QWidget(parent)
 {
-    // setFixedSize(200, 120); // Устанавливаем фиксированный размер окна
+    QPushButton *quit = new QPushButton("Close");
+    connect(quit, SIGNAL(clicked()), qApp, SLOT(aboutQt()));
 
-    // Здесь мы создаем и настраиваем дочерний виджет (родителем создаваемого виджета будет this, т.е. объект MyWidget).
-    // Вызов функции tr() позволяет перевести текст на кнопке "Quit" на другой язык на основании содержимого файла перевода.
-    QPushButton *quit = new QPushButton(tr("Quit"));
-    quit->setFont(QFont("Times", 18, QFont::Bold));
-    connect(quit, SIGNAL(clicked()), qApp, SLOT(quit()));
-    // quit является локальной переменной в нашем конструкторе. MyWidget не следит за ней;
-    // Qt заботится о ней и удалит её автоматически, когда придёт время уничтожать MyWidget. Поэтому MyWidget не нуждается в деструкторе.
+    LCDRange *angle = new LCDRange;
+    angle->setRange(5, 70);
 
-    QGridLayout *grid = new QGridLayout;
-    LCDRange *previousRange = 0;
+    CannonField *cannonField = new CannonField;
+    connect(angle, SIGNAL(valueChanged(int)), cannonField, SLOT(setAngle(int)));
+    connect(cannonField, SIGNAL(angleChanged(int)), angle, SLOT(setValue(int)));
 
-    for (int row = 0; row < 3; ++row) {
-        for (int column = 0; column < 3; ++column) {
-            LCDRange *lcdRange = new LCDRange;
-            grid->addWidget(lcdRange, row, column);
-            if (previousRange)
-                connect(lcdRange, SIGNAL(valueChanged(int)),
-                        previousRange, SLOT(setValue(int)));
-            previousRange = lcdRange;
-        }
-    }
+    QGridLayout *gridLayout = new QGridLayout; // Перешли на более мощное управление
+    gridLayout->addWidget(quit, 0, 0);
+    gridLayout->addWidget(angle, 1, 0);
+    gridLayout->addWidget(cannonField, 1, 1, 2, 1);
+    // Сообщаем QGridLayout о том, что правый столбец (столбец 1) является растягиваемым с коэффициентом растяжения равным 10.
+    gridLayout->setColumnStretch(1, 10);
+    setLayout(gridLayout);
 
-    QVBoxLayout *layout = new QVBoxLayout;
-    layout->addWidget(quit);
-    layout->addLayout(grid);
-    setLayout(layout);
+    angle->setValue(60);
+    angle->setFocus(); // Фокус для письма
 }

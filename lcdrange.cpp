@@ -12,7 +12,7 @@ LCDRange::LCDRange(QWidget *parent)
 
      connect(slider, SIGNAL(valueChanged(int)),
              lcd, SLOT(display(int)));
-     connect(slider, SIGNAL(valueChanged(int)),
+     connect(slider, SIGNAL(valueChanged(int)), // Пробрасываем сигнал дальше
              this, SIGNAL(valueChanged(int)));
 
      QVBoxLayout *layout = new QVBoxLayout;
@@ -29,4 +29,16 @@ LCDRange::LCDRange(QWidget *parent)
  void LCDRange::setValue(int value)
  {
      slider->setValue(value);
+ }
+
+ void LCDRange::setRange(int minValue, int maxValue)
+ {
+     if (minValue < 0 || maxValue > 99 || minValue > maxValue) {
+         qWarning("LCDRange::setRange(%d, %d)\n"
+                  "\tRange must be 0..99\n"
+                  "\tand minValue must not be greater than maxValue",
+                  minValue, maxValue);
+         return;
+     }
+     slider->setRange(minValue, maxValue);
  }

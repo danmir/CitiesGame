@@ -15,8 +15,10 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     mywidget.cpp \
-    lcdrange.cpp
+    lcdrange.cpp \
+    cannonfield.cpp
 
 HEADERS  += mainwindow.h \
     mywidget.h \
-    lcdrange.h
+    lcdrange.h \
+    cannonfield.h

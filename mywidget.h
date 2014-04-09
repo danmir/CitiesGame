@@ -11,6 +11,7 @@
 #include <QWidget>
 #include <QGridLayout>
 #include "lcdrange.h"
+#include "cannonfield.h"
 
 class MyWidget : public QWidget
  {
